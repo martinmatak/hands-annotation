@@ -7,8 +7,8 @@ Here is RetinaNet trained for a specific object detection - namely for detecting
 
 ## Installation
 
-0) Create virtual environment for python - execute `virtualenv -p python3 venv` and activate it by executing `source venv/bin/activate`. 
-1) Clone this repository.
+0) Clone this repository.
+1) Create virtual environment for python - execute `virtualenv -p python3 venv` and activate it by executing `source venv/bin/activate`. 
 2) Install requirements by executing `pip install -r requirements.txt`
 3) In the repository, execute `python setup.py install`.
 4) As of writing, this repository requires the master branch of `keras-resnet` (run `pip install --upgrade git+https://github.com/broadinstitute/keras-resnet`).
