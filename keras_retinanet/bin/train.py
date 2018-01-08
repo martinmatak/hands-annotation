@@ -149,7 +149,6 @@ def create_generators(args):
     elif args.dataset_type == 'csv':
         train_generator = CSVGenerator(
             args.annotations,
-            args.classes,
             train_image_data_generator,
             batch_size=args.batch_size
         )
@@ -211,7 +210,7 @@ def parse_args(args):
     parser.add_argument('--multi-gpu',     help='Number of GPUs to use for parallel processing.', type=int, default=0)
     parser.add_argument('--epochs',        help='Number of epochs to train.', type=int, default=50)
     parser.add_argument('--steps',         help='Number of steps per epoch.', type=int, default=10000)
-    parser.add_argument('--snapshot-path', help='Path to store snapshots of models during training (defaults to \'./snapshots\')', default='./snapshots')
+    parser.add_argument('--snapshot-path', help='Path to store snapshots of models during training (defaults to \'/output\')', default='/output')
     parser.add_argument('--no-snapshots',  help='Disable saving snapshots.', dest='snapshots', action='store_false')
     parser.set_defaults(snapshots=True)
 

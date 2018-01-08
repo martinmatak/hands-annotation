@@ -41,19 +41,8 @@ def _parse(value, function, fmt):
         raise_from(ValueError(fmt.format(e)), None)
 
 
-def _read_classes(csv_reader):
-    result = {}
-    for line, row in enumerate(csv_reader):
-        try:
-            class_name, class_id = row
-        except ValueError:
-            raise_from(ValueError('line {}: format should be \'class_name,class_id\''.format(line)), None)
-        class_id = _parse(class_id, int, 'line {}: malformed class ID: {{}}'.format(line))
-
-        if class_name in result:
-            raise ValueError('line {}: duplicate class name: \'{}\''.format(line, class_name))
-        result[class_name] = class_id
-    return result
+def _read_classes():
+    return {'hand': 0}
 
 
 def _read_annotations(csv_reader, classes):
@@ -107,7 +96,6 @@ class CSVGenerator(Generator):
     def __init__(
         self,
         csv_data_file,
-        csv_class_file,
         image_data_generator,
         base_dir=None,
         **kwargs
@@ -121,11 +109,7 @@ class CSVGenerator(Generator):
             self.base_dir = os.path.dirname(csv_data_file)
 
         # parse the provided class file
-        try:
-            with _open_for_csv(csv_class_file) as file:
-                self.classes = _read_classes(csv.reader(file, delimiter=','))
-        except ValueError as e:
-            raise_from(ValueError('invalid CSV class file: {}: {}'.format(csv_class_file, e)), None)
+        self.classes = _read_classes()
 
         self.labels = {}
         for key, value in self.classes.items():
