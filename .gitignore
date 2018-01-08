@@ -5,10 +5,7 @@ data/
 hand_dataset/
 build/
 dist/
-.floydexpt
-.floydignore
 floyd_requirements.txt
 .idea/
 keras_retinanet.egg-info/
-venv35/
-venv36/
+venv/

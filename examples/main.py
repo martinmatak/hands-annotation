@@ -3,21 +3,23 @@ from keras_retinanet.models.resnet import custom_objects
 from keras_retinanet.utils.image import preprocess_image
 from keras_retinanet.utils.image import resize_image
 import cv2
+import sys
 import numpy as np
 import time
 import imageio
 
 import tensorflow as tf
 
+
 def get_session():
     config = tf.ConfigProto()
     config.gpu_options.allow_growth = True
     return tf.Session(config=config)
 
-def annotate_image(image):
+
+def annotate_image(image, model):
     # copy to draw on
     draw = image.copy()
-    draw = cv2.cvtColor(draw, cv2.COLOR_BGR2RGB)
 
     # preprocess image for network
     image = preprocess_image(image)
@@ -44,47 +46,38 @@ def annotate_image(image):
 
     return draw
 
-files = [
-# "1_2015-10-03_20-23-27",
-"1_2015-10-03_20-38-29",
-"1_2015-10-03_20-53-30",
-"1_2015-10-03_21-08-31",
-"1_2015-10-03_21-23-32",
-"1_2015-10-03_21-38-33",
-"1_2015-10-03_21-53-34",
-"1_2015-10-03_22-08-35",
-"1_2015-10-03_22-23-36",
-"1_2015-10-03_22-38-37",
-"1_2015-10-03_22-53-39",
-"1_2015-10-03_23-08-39",
-"1_2015-10-03_23-23-40",
-"1_2015-10-03_23-38-42",
-"1_2015-10-03_23-53-42",
-"1_2015-10-04_00-08-43",
-"1_2015-10-04_00-23-45",
-"1_2015-10-04_00-38-46"
-]
 
-if __name__ == '__main__':
+def main(argv):
+    if len(argv) != 3:
+        print("Usage for image annotation: -i <path_input> <path_output>")
+        print("Usage for video annotation: -v <path_input> <path_output>")
+        sys.exit(1)
+    image_or_video, path_input, path_output = argv
     keras.backend.tensorflow_backend.set_session(get_session())
     print("set tensorflow")
 
     # load the model
     print('Loading the model, this may take a second...')
-    model = keras.models.load_model('/snapshots/resnet50_csv_17.h5', custom_objects=custom_objects)
+    model = keras.models.load_model('./snapshots/resnet50_csv_17.h5', custom_objects=custom_objects)
     print('Model created')
     # print model summary
     print(model.summary())
 
-    for filename in files:
-        reader = imageio.get_reader('/data/' + filename + ".mp4")
-        print("Loaded file: " + filename)
+    if "-v" in image_or_video:
+        reader = imageio.get_reader(path_input)
+        print("Loaded file: " + path_input)
         fps = reader.get_meta_data()['fps']
 
-        writer = imageio.get_writer('./annotated_videos/' + filename + '-annotated.mp4', fps=fps)
+        writer = imageio.get_writer(path_output, fps=fps)
 
         for im in reader:
-            writer.append_data(annotate_image(im))
+            writer.append_data(annotate_image(im, model))
         writer.close()
+    elif "-i" in image_or_video:
+        im = imageio.imread(path_input)
+        print("Loaded file: " + path_input)
+        imageio.imwrite(path_output, annotate_image(im, model))
 
 
+if __name__ == "__main__":
+    main(sys.argv[1:])
