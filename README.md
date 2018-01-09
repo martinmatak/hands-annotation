@@ -15,7 +15,7 @@ Here is RetinaNet trained for a specific object detection - naimely for detectin
 
 
 ### Usage
-By default, pretrained model is used which can be downloaded [here](l). To use it, move it to the `snapshots` directory without renaming it. However, this model is unfortunately weak and not well trained because of lack of hardware resources.
+By default, pretrained model is used which can be downloaded [here](https://www.dropbox.com/s/docoy4p0hl40v1n/resnet50_csv_17.h5). To use it, move it to the `snapshots` directory without renaming it. However, this model is unfortunately weak and not well trained because of lack of hardware resources.
 
 Script `main.py` in `examples` directory is one of the examples how this model can be used. It comes with two options: annotating JPG image (`-i`) or annotating video (`-v`).
 
