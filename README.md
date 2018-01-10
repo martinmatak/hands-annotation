@@ -22,3 +22,9 @@ Script `main.py` in `examples` directory is one of the examples how this model c
 Scheme for usage is the following:
 `$ python examples/main.py -option <input_file_path> <output_file_path>`
 where `-option` is either `-i` or `-v`.
+
+#### Results 
+ 
+Result of running `$ python examples/main -i image.jpg image-annotated.jpg` where `image.jpg` is [this one](https://image.ibb.co/hwtFwm/image.jpg). 
+ 
+![it works moment](https://image.ibb.co/cUcBK6/image_annotated.jpg)
