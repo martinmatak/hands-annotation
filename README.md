@@ -3,7 +3,7 @@ This project is a domain-specific  usage of [Keras implementaion of RetinaNet](h
 
 RetinaNet is a deep neural network for object detection and it is described in [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002) by Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He and Piotr Dollár.
 
-Here is RetinaNet trained for a specific object detection - naimely for detecting hands. Dataset used for training is [publicly available](http://www.robots.ox.ac.uk/~vgg/data/hands/). 
+Here is RetinaNet trained for a specific object detection - namely for detecting hands. Dataset used for training is [publicly available](http://www.robots.ox.ac.uk/~vgg/data/hands/). 
 
 ## Installation
 
