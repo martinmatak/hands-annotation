@@ -39,7 +39,7 @@ def annotate_image(image, model):
 
     # visualize detections
     for idx, (label, score) in enumerate(zip(predicted_labels, scores)):
-        if score < 0.4:
+        if score < 0.3:
             continue
         b = detections[0, idx, :4].astype(int)
         cv2.rectangle(draw, (b[0], b[1]), (b[2], b[3]), (0, 0, 255), 3)
