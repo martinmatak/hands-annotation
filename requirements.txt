@@ -13,7 +13,7 @@ idna==2.6
 imageio==2.2.0
 Keras==2.1.2
 Markdown==2.6.10
-marshmallow==2.15.0
+marshmallow>=2.15.1
 matplotlib==2.1.1
 numpy==1.13.3
 olefile==0.44
