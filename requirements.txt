@@ -31,7 +31,7 @@ requests-toolbelt==0.8.0
 scipy==1.0.0
 six==1.11.0
 tabulate==0.8.2
-tensorflow==1.12.2
+tensorflow==2.5.3
 tensorflow-tensorboard==0.4.0rc3
 urllib3==1.24.2
 Werkzeug==0.15.3
